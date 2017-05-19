@@ -148,7 +148,7 @@ public class Casal implements Serializable {
 
     @Override
     public String toString() {
-        return "br.org.dioceseroraima.ecc.modelo.Casal[ id=" + id + " ]";
+        return "Casal [ " + idMarido.getApelido() + "   e  " + idEsposa.getApelido() + " ]";
     }
     
 }

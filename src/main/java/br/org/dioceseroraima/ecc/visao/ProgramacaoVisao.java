@@ -28,8 +28,8 @@ import javax.inject.Named;
  */
 @Named
 @SessionScoped
-public class ProgramacaoVisao extends AbstractVisao implements Serializable{
-    
+public class ProgramacaoVisao extends AbstractVisao implements Serializable {
+
     @EJB
     private EventoAtividadeControle eventoAtividadeControle;
     @EJB
@@ -42,43 +42,113 @@ public class ProgramacaoVisao extends AbstractVisao implements Serializable{
     private FuncaoControle funcaoControle;
 
     private EventoAtividade eventoAtividade;
-    
+
     private List<EventoAtividade> listEventoAtividade = new ArrayList<>();
     private List<Evento> listEvento = new ArrayList<>();
     private List<Funcao> listFuncao = new ArrayList<>();
     private List<Atividade> listAtividade = new ArrayList<>();
     private List<Casal> listCasal = new ArrayList<>();
-    
-    
-    public ProgramacaoVisao(){
-        
+
+    public ProgramacaoVisao() {
+
     }
-    
 
     public String abrirCadastro() {
         try {
             eventoAtividade = new EventoAtividade();
-            
+
             listFuncao = new ArrayList<>();
             listEvento = new ArrayList<>();
             listCasal = new ArrayList<>();;
             listAtividade = new ArrayList<>();
             listEventoAtividade = new ArrayList<>();
-            
+
             listFuncao = funcaoControle.findAll();
             listEvento = eventoControle.findAll();
             listCasal = casalControle.findAll();
             listAtividade = atividadeControle.findAll();
             listEventoAtividade = eventoAtividadeControle.findAll();
-            
-            
+
             return redirect("/sistema/admin/cadastro/formProgramacao.xhtml");
         } catch (Exception e) {
             return null;
         }
     }
-    
-    
+
+    public void salvar() {
+        try {
+            eventoAtividadeControle.salvar(eventoAtividade);
+
+            showFacesMessage("salvo com sucesso!!!", 2);
+
+            eventoAtividade = new EventoAtividade();
+            listFuncao = new ArrayList<>();
+            listEvento = new ArrayList<>();
+            listCasal = new ArrayList<>();;
+            listAtividade = new ArrayList<>();
+            listEventoAtividade = new ArrayList<>();
+
+            listFuncao = funcaoControle.findAll();
+            listEvento = eventoControle.findAll();
+            listCasal = casalControle.findAll();
+            listAtividade = atividadeControle.findAll();
+            listEventoAtividade = eventoAtividadeControle.findAll();
+
+            //FacesContext.getCurrentInstance().getExternalContext().redirect("/evento/sistema/usuario/listaUsuarios.xhtml");
+            //return redirect("/sistema/usuario/listaUsuarios.xhtml?faces-redirect=true");
+        } catch (Exception e) {
+            showFacesMessage(e.getMessage(), 4);
+            //return null;
+        }
+    }
+
+    public String editar(EventoAtividade aux) {
+        try {
+            eventoAtividade = eventoAtividadeControle.pegaEventoAtividadeId(aux.getId());
+
+            listFuncao = new ArrayList<>();
+            listEvento = new ArrayList<>();
+            listCasal = new ArrayList<>();;
+            listAtividade = new ArrayList<>();
+            listEventoAtividade = new ArrayList<>();
+
+            listFuncao = funcaoControle.findAll();
+            listEvento = eventoControle.findAll();
+            listCasal = casalControle.findAll();
+            listAtividade = atividadeControle.findAll();
+            listEventoAtividade = eventoAtividadeControle.findAll();
+
+            return redirect("/sistema/admin/cadastro/formProgramacao.xhtml");
+
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public String remover(EventoAtividade aux) {
+        try {
+            eventoAtividadeControle.remove(aux);
+
+            showFacesMessage("Usuário deletado com sucesso!!!", 2);
+            eventoAtividade = new EventoAtividade();
+            listFuncao = new ArrayList<>();
+            listEvento = new ArrayList<>();
+            listCasal = new ArrayList<>();;
+            listAtividade = new ArrayList<>();
+            listEventoAtividade = new ArrayList<>();
+
+            listFuncao = funcaoControle.findAll();
+            listEvento = eventoControle.findAll();
+            listCasal = casalControle.findAll();
+            listAtividade = atividadeControle.findAll();
+            listEventoAtividade = eventoAtividadeControle.findAll();
+            return redirect("/sistema/admin/cadastro/formProgramacao.xhtml");
+
+        } catch (Exception e) {
+            showFacesMessage(e.getMessage(), 4);
+            return null;
+        }
+    }
     //Gets e Sets
 
     public EventoAtividade getEventoAtividade() {
@@ -128,7 +198,5 @@ public class ProgramacaoVisao extends AbstractVisao implements Serializable{
     public void setListCasal(List<Casal> listCasal) {
         this.listCasal = listCasal;
     }
-    
-    
-    
+
 }

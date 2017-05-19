@@ -27,7 +27,7 @@
                                     </p:selectOneMenu>
                                 </div>
                             </div>
-                            
+
                             <div class="col-lg-12">
                                 <div class="col-md-1">
                                     Atividade 
@@ -40,9 +40,46 @@
                                     </p:selectOneMenu>
                                 </div>
                             </div>
-                            
-                            
-                            
+
+                            <div class="col-lg-12">
+                                <div class="col-md-1">
+                                    Casal responsável 
+                                </div>
+                                <div class="col-md-11">                              
+                                    <p:selectOneMenu id="idCasal" value="#{programacaoVisao.eventoAtividade.idCasal}" converter="converterPadrao" >
+                                        <f:selectItems value="#{programacaoVisao.listCasal}"
+                                                       var="ItemCasal"
+                                                       itemValue="#{ItemCasal}"/>
+                                    </p:selectOneMenu>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="col-md-1">
+                                    Função do Casal 
+                                </div>
+                                <div class="col-md-11">                              
+                                    <p:selectOneMenu id="idFuncao" value="#{programacaoVisao.eventoAtividade.idFuncao}" converter="converterPadrao" >
+                                        <f:selectItems value="#{programacaoVisao.listFuncao}"
+                                                       var="ItemFuncao"
+                                                       itemValue="#{ItemFuncao}"/>
+                                    </p:selectOneMenu>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                Data e Horário do Início da Atividade: 
+                            </div>
+                            <div class="col-md-11">                              
+                                <p:calendar id="dataInicio" value="#{programacaoVisao.eventoAtividade.dataHoraInicio}" showOn="button" locale="pt_BR" pattern="dd/MM/yyyy HH:mm" rendered="true" requiredMessage="Data de Início do Evento é obrigatório!!!"/>                                    
+                            </div>
+
+                            <div class="col-md-1">
+                                Data e Horário do Encerramento da Atividade: 
+                            </div>
+                            <div class="col-md-11">                              
+                                <p:calendar id="dataFim" value="#{programacaoVisao.eventoAtividade.dataHoraFim}" showOn="button" locale="pt_BR" pattern="dd/MM/yyyy HH:mm" rendered="true" requiredMessage="Data de Encerramento do Evento é obrigatório!!!"/>                                    
+                            </div>
+
                         </div>
                     </fieldset>
                 </h:panelGroup>
@@ -71,12 +108,35 @@
                             </f:facet>
                             <h:outputText value="#{s.id}"/>
                         </p:column>
-                        <p:column filterBy="#{s.nome}">
+                        <p:column filterBy="#{s.idEvento.nome}">
                             <f:facet name="header">
-                                <h:outputText value="Programacao"/>
+                                <h:outputText value="Evento"/>
                             </f:facet>
-                            <h:outputText value="#{s.nome}"/>
+                            <h:outputText value="#{s.idEvento.nome}"/>
                         </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Atividade"/>
+                            </f:facet>
+                            <h:outputText value="#{s.idAtividade.nome}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Início"/>
+                            </f:facet>
+                            <h:outputText value="#{s.dataHoraInicio}">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Fim"/>
+                            </f:facet>
+                            <h:outputText value="#{s.dataHoraFim}">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+                            </h:outputText>
+                        </p:column>
+                        
                         <p:column headerText="Opções" width="20%">
 
                             <p:commandButton icon="ui-icon-pencil"

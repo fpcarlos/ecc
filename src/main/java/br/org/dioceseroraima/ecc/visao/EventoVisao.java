@@ -47,6 +47,7 @@ public class EventoVisao extends AbstractVisao implements Serializable {
             listEvento = eventoControle.findAll();
             listParoquia = new ArrayList<>();
             listParoquia = paroquiaControle.findAll();
+            //System.out.println("Entrando no site");
 
             return redirect("/sistema/admin/cadastro/formEvento.xhtml");
         } catch (Exception e) {

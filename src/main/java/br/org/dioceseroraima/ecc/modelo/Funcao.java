@@ -102,7 +102,7 @@ public class Funcao implements Serializable {
 
     @Override
     public String toString() {
-        return "br.org.dioceseroraima.ecc.modelo.Funcao[ id=" + id + " ]";
+        return this.nome;
     }
     
 }
