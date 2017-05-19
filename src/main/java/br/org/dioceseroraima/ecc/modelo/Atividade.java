@@ -102,7 +102,7 @@ public class Atividade implements Serializable {
 
     @Override
     public String toString() {
-        return "br.org.dioceseroraima.ecc.modelo.Atividade[ id=" + id + " ]";
+        return this.nome;
     }
     
 }

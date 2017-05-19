@@ -153,7 +153,7 @@ public class Evento implements Serializable {
 
     @Override
     public String toString() {
-        return "br.org.dioceseroraima.ecc.modelo.Evento[ id=" + id + " ]";
+        return this.nome;
     }
     
 }
