@@ -118,7 +118,7 @@ public class Participante implements Serializable {
 
     @Override
     public String toString() {
-        return "br.org.dioceseroraima.ecc.modelo.Participante[ id=" + id + " ]";
+        return ""+ this.idEvento;
     }
     
 }

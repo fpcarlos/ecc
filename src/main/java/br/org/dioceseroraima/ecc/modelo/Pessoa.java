@@ -223,7 +223,7 @@ public class Pessoa implements Serializable {
 
     @Override
     public String toString() {
-        return "br.org.dioceseroraima.ecc.modelo.Pessoa[ id=" + id + " ]";
+        return this.nome;
     }
     
 }

@@ -175,7 +175,7 @@ public class Paroquia implements Serializable {
 
     @Override
     public String toString() {
-        return "br.org.dioceseroraima.ecc.modelo.Paroquia[ id=" + id + " ]";
+        return this.nome;
     }
     
 }
