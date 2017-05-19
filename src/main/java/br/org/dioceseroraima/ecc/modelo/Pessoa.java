@@ -80,6 +80,9 @@ public class Pessoa implements Serializable {
     @Size(max = 2147483647)
     @Column(name = "religiao")
     private String religiao;
+    @Size(max = 1)
+    @Column(name = "sexo")
+    private String sexo;
     @OneToMany(mappedBy = "idEsposa")
     private List<Casal> casalList;
     @OneToMany(mappedBy = "idMarido")
@@ -174,6 +177,14 @@ public class Pessoa implements Serializable {
         this.religiao = religiao;
     }
 
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
     @XmlTransient
     public List<Casal> getCasalList() {
         return casalList;
@@ -225,5 +236,5 @@ public class Pessoa implements Serializable {
     public String toString() {
         return this.nome;
     }
-    
+
 }

@@ -35,6 +35,19 @@
                                     <p:calendar id="dataNascimento" value="#{pessoaVisao.pessoa.dataNascimento}" showOn="button" locale="pt_BR" pattern="dd/MM/yyyy" rendered="true" requiredMessage="Data de Nascimento é obrigatório!!!"/>                                    
                                 </div>
                                 <div class="col-md-1">
+                                    Sexo: 
+                                </div>
+                                <div class="col-md-11">
+                                    <p:selectOneMenu id="sexo" value="#{pessoaVisao.pessoa.sexo}" >
+                                        <f:selectItems value="#{pessoaVisao.listSexo}"
+                                                       var="idItemSexo"
+                                                       itemValue="#{idItemSexo}"/>
+                                    </p:selectOneMenu>  
+                                    
+                                    
+                                </div>
+                                
+                                <div class="col-md-1">
                                     CPF 
                                 </div>
                                 <div class="col-md-11">                              
@@ -111,6 +124,12 @@
                                 <h:outputText value="Nome"/>
                             </f:facet>
                             <h:outputText value="#{s.nome}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Sexo"/>
+                            </f:facet>
+                            <h:outputText value="#{s.sexo}"/>
                         </p:column>
                         <p:column headerText="Opções" width="20%">
 

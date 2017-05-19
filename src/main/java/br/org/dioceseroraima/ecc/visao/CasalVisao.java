@@ -40,6 +40,8 @@ public class CasalVisao extends AbstractVisao implements Serializable{
     private List<Casal> listCasal = new ArrayList<>();
     
     private List<Pessoa> listPessoa = new ArrayList<>();
+    private List<Pessoa> listPessoaM = new ArrayList<>();
+    private List<Pessoa> listPessoaF = new ArrayList<>();
     
     private List<Paroquia> listParoquia = new ArrayList<>();
     
@@ -55,11 +57,16 @@ public class CasalVisao extends AbstractVisao implements Serializable{
             casal = new Casal();
             
             listCasal = new ArrayList<>();
-            listPessoa= new ArrayList<>();
-            listParoquia= new ArrayList<>();
-            
+            listPessoa= new ArrayList<>();            
+            listParoquia= new ArrayList<>();            
             listCasal = casalControle.findAll();
             listPessoa= pessoaControle.findAll();
+            
+            listPessoaM= new ArrayList<>();
+            listPessoaF= new ArrayList<>();
+            listPessoaM= pessoaControle.findAllSexo("M");
+            listPessoaF= pessoaControle.findAllSexo("F");
+            
             listParoquia = paroquiaControle.findAll();
             
             return redirect("/sistema/admin/cadastro/formCasal.xhtml");
@@ -163,6 +170,22 @@ public class CasalVisao extends AbstractVisao implements Serializable{
 
     public void setListParoquia(List<Paroquia> listParoquia) {
         this.listParoquia = listParoquia;
+    }
+
+    public List<Pessoa> getListPessoaM() {
+        return listPessoaM;
+    }
+
+    public void setListPessoaM(List<Pessoa> listPessoaM) {
+        this.listPessoaM = listPessoaM;
+    }
+
+    public List<Pessoa> getListPessoaF() {
+        return listPessoaF;
+    }
+
+    public void setListPessoaF(List<Pessoa> listPessoaF) {
+        this.listPessoaF = listPessoaF;
     }
     
     

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.model.SelectItem;
 import javax.inject.Named;
 
 /**
@@ -19,36 +20,41 @@ import javax.inject.Named;
  * @author fpcarlos
  */
 @Named
-@SessionScoped  
-public class PessoaVisao extends AbstractVisao implements Serializable{
-    
+@SessionScoped
+public class PessoaVisao extends AbstractVisao implements Serializable {
+
     @EJB
     private PessoaControle pessoaControle;
-    
+
     private Pessoa pessoa;
-    
+
     private List<Pessoa> listPessoa = new ArrayList<>();
-    
-    public PessoaVisao(){
-        
+
+    private List<SelectItem> listSexo = new ArrayList<>();
+
+    public PessoaVisao() {
+
     }
-    
-    
-    public String abrirCadastro(){
+
+    public String abrirCadastro() {
         try {
             pessoa = new Pessoa();
             listPessoa = new ArrayList<>();
+            listSexo = new ArrayList<>();
+            listSexo.add(new SelectItem("M", "Masculino"));
+            listSexo.add(new SelectItem("F", "Feminino"));
+
             listPessoa = pessoaControle.findAll();
             return redirect("/sistema/admin/cadastro/formPessoa.xhtml");
         } catch (Exception e) {
             return null;
         }
     }
-    
-    public void salvar(){
+
+    public void salvar() {
         try {
             pessoaControle.salvar(pessoa);;
-            
+
             showFacesMessage("salvo com sucesso!!!", 2);
             pessoa = new Pessoa();
             listPessoa = new ArrayList<>();
@@ -60,11 +66,11 @@ public class PessoaVisao extends AbstractVisao implements Serializable{
             //return null;
         }
     }
-    
-    public String editar(Pessoa aux){
-         try {
+
+    public String editar(Pessoa aux) {
+        try {
             pessoa = pessoaControle.pegaPessoaId(aux.getId());
-            
+
             listPessoa = new ArrayList<>();
             listPessoa = pessoaControle.findAll();
             return redirect("/sistema/admin/cadastro/formPessoa.xhtml");
@@ -73,16 +79,16 @@ public class PessoaVisao extends AbstractVisao implements Serializable{
             return null;
         }
     }
-    
-    public String remover(Pessoa aux){
+
+    public String remover(Pessoa aux) {
         try {
             pessoaControle.remove(aux);
-            
+
             showFacesMessage("Usuário deletado com sucesso!!!", 2);
             pessoa = new Pessoa();
             listPessoa = new ArrayList<>();
             listPessoa = pessoaControle.findAll();
-            
+
             return redirect("/sistema/admin/cadastro/formPessoa.xhtml");
 
         } catch (Exception e) {
@@ -90,12 +96,8 @@ public class PessoaVisao extends AbstractVisao implements Serializable{
             return null;
         }
     }
-    
-    
-    
-    
-    //Gets e Sets
 
+    //Gets e Sets
     public Pessoa getPessoa() {
         return pessoa;
     }
@@ -111,6 +113,13 @@ public class PessoaVisao extends AbstractVisao implements Serializable{
     public void setListPessoa(List<Pessoa> listPessoa) {
         this.listPessoa = listPessoa;
     }
-    
-    
+
+    public List<SelectItem> getListSexo() {
+        return listSexo;
+    }
+
+    public void setListSexo(List<SelectItem> listSexo) {
+        this.listSexo = listSexo;
+    }
+
 }

@@ -31,7 +31,7 @@
                                 </div>
                                 <div class="col-md-11">
                                     <p:selectOneMenu id="idMarido" value="#{casalVisao.casal.idMarido}" converter="converterPadrao" >
-                                        <f:selectItems value="#{casalVisao.listPessoa}"
+                                        <f:selectItems value="#{casalVisao.listPessoaM}"
                                                        var="ItemMarido"
                                                        itemValue="#{ItemMarido}"/>
                                     </p:selectOneMenu>
@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="col-md-11">
                                     <p:selectOneMenu id="idEsposa" value="#{casalVisao.casal.idEsposa}" converter="converterPadrao" >
-                                        <f:selectItems value="#{casalVisao.listPessoa}"
+                                        <f:selectItems value="#{casalVisao.listPessoaF}"
                                                        var="ItemEsposa"
                                                        itemValue="#{ItemEsposa}"/>
                                     </p:selectOneMenu>

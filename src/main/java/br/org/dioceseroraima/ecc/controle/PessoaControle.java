@@ -71,4 +71,18 @@ public class PessoaControle extends AbstractControle{
         }
 
     }    
+    public List<Pessoa> findAllSexo(String s) throws Exception {
+        try {
+            List<Pessoa> listaPessoaSexo = new ArrayList<>();
+            String sql = "select * from pessoa where sexo= '"+s+"'";
+            listaPessoaSexo = executaSqlNativo(sql, Pessoa.class, entityManager);
+            return listaPessoaSexo;
+
+        } catch (RuntimeException re) {
+            throw new Exception(" Erro" + re.getMessage());
+        } catch (Exception e) {
+            throw new Exception(" Erro" + e.getMessage());
+        }
+
+    }   
 }
