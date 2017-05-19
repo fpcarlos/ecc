@@ -8,82 +8,65 @@
     </h:head>
     <ui:composition template="/template/template.xhtml">
         <ui:define name="content"> 
-            <h:form id="CasalForm">
+            <h:form id="EventoForm">
                 <!--<p:messages id="msgid"></p:messages>-->
                 <h:panelGroup id="display" layout="block">                    
 
                     <fieldset>
-                        <legend>Cadastro de Casais</legend>
+                        <legend>Cadastro de Eventos</legend>
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="col-md-1">
                                     Paroquia: 
                                 </div>
                                 <div class="col-md-11">
-                                    <p:selectOneMenu id="idParoquia" value="#{casalVisao.casal.idParoquia}" converter="converterPadrao" >
-                                        <f:selectItems value="#{casalVisao.listParoquia}"
+                                    <p:selectOneMenu id="idParoquia" value="#{eventoVisao.evento.idParoquia}" converter="converterPadrao" >
+                                        <f:selectItems value="#{eventoVisao.listParoquia}"
                                                        var="ItemParoquia"
                                                        itemValue="#{ItemParoquia}"/>
                                     </p:selectOneMenu>
                                 </div>
                                 <div class="col-md-1">
-                                    Marido: 
-                                </div>
-                                <div class="col-md-11">
-                                    <p:selectOneMenu id="idMarido" value="#{casalVisao.casal.idMarido}" converter="converterPadrao" >
-                                        <f:selectItems value="#{casalVisao.listPessoa}"
-                                                       var="ItemMarido"
-                                                       itemValue="#{ItemMarido}"/>
-                                    </p:selectOneMenu>
-                                </div>
-
-                                <div class="col-md-1">
-                                    Esposa: 
-                                </div>
-                                <div class="col-md-11">
-                                    <p:selectOneMenu id="idEsposa" value="#{casalVisao.casal.idEsposa}" converter="converterPadrao" >
-                                        <f:selectItems value="#{casalVisao.listPessoa}"
-                                                       var="ItemEsposa"
-                                                       itemValue="#{ItemEsposa}"/>
-                                    </p:selectOneMenu>
-                                </div>
-
-                                
-
-                                <div class="col-md-1">
-                                    Número de Filhos: 
+                                    Evento: 
                                 </div>
                                 <div class="col-md-11">                              
-                                    <p:inputText id="numeroFilho" value="#{casalVisao.casal.numeroFilho}"  size="10"/>
+                                    <p:inputTextarea id="nome" value="#{eventoVisao.evento.nome}" cols="60" rows="3"/>
                                 </div>
 
                                 <div class="col-md-1">
-                                    Informações do Casal: 
+                                    Data Início: 
                                 </div>
-                                <div class="col-md-11">
-                                    <p:inputTextarea id="casadoObs" value="#{casalVisao.casal.casadoObs}" cols="60" rows="3"/>
+                                <div class="col-md-11">                              
+                                    <p:calendar id="dataInicio" value="#{eventoVisao.evento.dataInicio}" showOn="button" locale="pt_BR" pattern="dd/MM/yyyy" rendered="true" requiredMessage="Data de Início do Evento é obrigatório!!!"/>                                    
+                                </div>
+
+                                <div class="col-md-1">
+                                    Data do Encerramento: 
+                                </div>
+                                <div class="col-md-11">                              
+                                    <p:calendar id="dataFim" value="#{eventoVisao.evento.dataFim}" showOn="button" locale="pt_BR" pattern="dd/MM/yyyy" rendered="true" requiredMessage="Data de Encerramento do Evento é obrigatório!!!"/>                                    
                                 </div>
 
                             </div>
                         </div>
                     </fieldset>
                 </h:panelGroup>
-                <p:commandButton value="Salvar" update=":CasalForm :CasalListForm"
-                                 actionListener="#{casalVisao.salvar}" icon="ui-icon-disk" />
+                <p:commandButton value="Salvar" update=":EventoForm :EventoListForm"
+                                 actionListener="#{eventoVisao.salvar}" icon="ui-icon-disk" />
                 <p:commandButton value="Cancelar"
-                                 action="#{casalVisao.abrirCadastro}" icon="ui-icon-close"
+                                 action="#{eventoVisao.abrirCadastro}" icon="ui-icon-close"
                                  immediate="true" />
 
             </h:form>
-            <h:form id="CasalListForm">
+            <h:form id="EventoListForm">
                 <h:panelGroup id="Lista2">
-                    <p:dataTable id="datalist" value="#{casalVisao.listCasal}" var="s"
+                    <p:dataTable id="datalist" value="#{eventoVisao.listEvento}" var="s"
                                  selectionMode="single"
                                  paginator="true"
                                  rowKey="#{s.id}"
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
-                                 emptyMessage="Nenhuma Casal Cadastrado"
+                                 emptyMessage="Nenhum Evento Cadastrado"
                                  sortBy="#{s.id}" 
                                  sortOrder="descending"
                                  >
@@ -95,25 +78,34 @@
                         </p:column>
                         <p:column filterBy="#{s.idMarido.nome}">
                             <f:facet name="header">
-                                <h:outputText value="Esposo"/>
+                                <h:outputText value="Evento"/>
                             </f:facet>
-                            <h:outputText value="#{s.idMarido.nome}"/>
+                            <h:outputText value="#{s.nome}"/>
                         </p:column>
-                        <p:column filterBy="#{s.idEsposa.nome}">
+                        <p:column filterBy="#{s.dataInicio}">
                             <f:facet name="header">
-                                <h:outputText value="Esposa"/>
+                                <h:outputText value="Data Inicio"/>
                             </f:facet>
-                            <h:outputText value="#{s.idEsposa.nome}"/>
+                            <h:outputText value="#{s.dataInicio}">
+                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                            </h:outputText>
                         </p:column>
-
+                        <p:column filterBy="#{s.dataFim}">
+                            <f:facet name="header">
+                                <h:outputText value="Data Fim"/>
+                            </f:facet>
+                            <h:outputText value="#{s.dataFim}">
+                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                            </h:outputText>
+                        </p:column>
                         <p:column headerText="Opções" width="20%">
 
                             <p:commandButton icon="ui-icon-pencil"
-                                             action="#{casalVisao.editar(s)}"
+                                             action="#{eventoVisao.editar(s)}"
                                              title="Editar" escape="true" />
 
                             <p:commandButton icon="ui-icon-trash"
-                                             action="#{casalVisao.remover(s)}">
+                                             action="#{eventoVisao.remover(s)}">
 
                                 <p:confirm header="Remover"
                                            message="Tem certeza que deseja excluir o Usuário: #{s.id}... "

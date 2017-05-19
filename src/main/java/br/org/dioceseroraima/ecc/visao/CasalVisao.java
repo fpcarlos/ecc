@@ -78,6 +78,9 @@ public class CasalVisao extends AbstractVisao implements Serializable{
             listCasal = new ArrayList<>();
             listPessoa= new ArrayList<>();
             listParoquia= new ArrayList<>();
+             listCasal = casalControle.findAll();
+            listPessoa= pessoaControle.findAll();
+            listParoquia = paroquiaControle.findAll();
             //FacesContext.getCurrentInstance().getExternalContext().redirect("/evento/sistema/usuario/listaUsuarios.xhtml");
             //return redirect("/sistema/usuario/listaUsuarios.xhtml?faces-redirect=true");
         } catch (Exception e) {
@@ -92,6 +95,9 @@ public class CasalVisao extends AbstractVisao implements Serializable{
             listCasal = new ArrayList<>();
             listPessoa= new ArrayList<>();
             listParoquia= new ArrayList<>();
+             listCasal = casalControle.findAll();
+            listPessoa= pessoaControle.findAll();
+            listParoquia = paroquiaControle.findAll();
             
             return redirect("/sistema/admin/cadastro/formCasal.xhtml");
 
@@ -111,7 +117,9 @@ public class CasalVisao extends AbstractVisao implements Serializable{
             listCasal = new ArrayList<>();
             listPessoa= new ArrayList<>();
             listParoquia= new ArrayList<>();
-            
+             listCasal = casalControle.findAll();
+            listPessoa= pessoaControle.findAll();
+            listParoquia = paroquiaControle.findAll();
             return redirect("/sistema/admin/cadastro/formCasal.xhtml");
 
         } catch (Exception e) {
@@ -153,7 +161,7 @@ public class CasalVisao extends AbstractVisao implements Serializable{
         return listParoquia;
     }
 
-    public void setListParoqui(List<Paroquia> listParoquia) {
+    public void setListParoquia(List<Paroquia> listParoquia) {
         this.listParoquia = listParoquia;
     }
     
